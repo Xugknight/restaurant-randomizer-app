@@ -22,8 +22,6 @@ router.post('/sign-up', async (req, res) => {
     req.session.userId = user._id;
     res.redirect('/')
   } catch (err) {
-    // This code will execute if an error happens
-    // in the try block above
     if (err.message.includes('duplicate key')) err.message = 'User Already Exists';
     res.render('auth/sign-up.ejs', { error: err.message });
   }
