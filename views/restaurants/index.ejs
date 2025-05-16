@@ -1,1 +1,43 @@
-<p> These are your restaurants </p> 
+<%- include('../partials/header.ejs') %>
+
+    <h1>All Restaurants!</h1>
+
+    <form method="GET" action="/restaurants">
+        <label>
+            Category:
+            <select name="category">
+                <option value="">All</option>
+                <% categories.forEach((category)=> { %>
+                    <option value="<%= category %>" <%=selectedCategory===category ? 'selected' : '' %>><%= category %>
+                    </option>
+                    <% }) %>
+            </select>
+        </label>
+
+        <label>
+            Cost:
+            <select name="cost">
+                <option value="">All</option>
+                <option value="$" <%=selectedCost==='$' ? 'selected' : '' %>>$</option>
+                <option value="$$" <%=selectedCost==='$$' ? 'selected' : '' %>>$$</option>
+                <option value="$$$" <%=selectedCost==='$$$' ? 'selected' : '' %>>$$$</option>
+            </select>
+        </label>
+        <button type="submit">FILTER!</button>
+    </form>
+
+    <% if (restaurants.length===0) { %>
+        <p>No restaurants match your criteria.</p>
+        <% } else { %>
+            <ul>
+                <% restaurants.forEach((restaurant)=> { %>
+                    <li>
+                        <a href="/restaurants/<%= restaurant._id %>">
+                            <%= restaurant.name %>
+                        </a> - <%= restaurant.category %> - <%= restaurant.cost %>
+                    </li>
+                    <% }) %>
+            </ul>
+            <% } %>
+
+                <%- include('../partials/footer.ejs') %>

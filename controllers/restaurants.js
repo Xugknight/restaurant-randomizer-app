@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Restaurant = require('../models/restaurant');
 const Review = require('../models/review');
+const categories = require('../utils/categories');
 
 // Middleware used to protect routes that need a logged in user
 const ensureLoggedIn = require('../middleware/ensure-logged-in');
@@ -11,13 +12,26 @@ const ensureLoggedIn = require('../middleware/ensure-logged-in');
 
 // Index action
 // GET /restaurants
-router.get('/', (req, res) => {
-  res.render('index.ejs');
+router.get('/', async (req, res) => {
+  const filter = {};
+  if (req.query.category) {
+    filter.category = req.query.category;
+  }
+  if (req.query.cost) {
+    filter.cost = req.query.cost;
+  }
+  const restaurants = await Restaurant.find(filter);
+  res.render('restaurants/index.ejs', { 
+    restaurants, 
+    categories,
+    selectedCategory: req.query.category || '',
+    selectedCost: req.query.cost || ''
+  });
 });
 
 // GET /restaurants/new
 router.get('/new', ensureLoggedIn, (req, res) => {
-  res.send('Create a restaurant!');
+  res.render('restaurants/new.ejs', { categories });
 });
 
 module.exports = router;
