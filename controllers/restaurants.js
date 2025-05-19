@@ -65,4 +65,19 @@ router.get('/:id/edit', ensureLoggedIn, async (req, res) => {
   res.render('restaurants/edit.ejs', { restaurant, categories });
 });
 
+//Update action
+// PUT /restaurants/:id
+router.put('/:id', ensureLoggedIn, async (req, res) => {
+  const restaurant = await Restaurant.findById(req.params.id);
+  if (!restaurant.createdBy.equals(req.user._id)) {
+    res.send('You cannot do that');
+  }
+  restaurant.name = req.body.name;
+  restaurant.category = req.body.category;
+  restaurant.cost = req.body.cost;
+  restaurant.description = req.body.description;
+  await restaurant.save();
+  res.redirect(`/restaurants/${restaurant._id}`);
+});
+
 module.exports = router;
