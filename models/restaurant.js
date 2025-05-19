@@ -23,6 +23,10 @@ const restaurantSchema = new Schema({
         ref: 'User',
         required: true
     },
+    requestDelete: {
+        type: Boolean,
+        default: false,
+    }
 }, {
     timestamps: true
 });
