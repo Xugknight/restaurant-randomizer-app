@@ -13,7 +13,7 @@ const ensureLoggedIn = require('../middleware/ensure-logged-in');
 // Index action
 // GET /restaurants
 router.get('/', async (req, res) => {
-  const filter = {};
+  const filter = { requestDelete: false };
   if (req.query.category) {
     filter.category = req.query.category;
   }
@@ -35,7 +35,7 @@ router.get('/new', ensureLoggedIn, (req, res) => {
   res.render('restaurants/new.ejs', { categories });
 });
 
-//Create action
+// Create action
 // POST /restaurants
 router.post('/', ensureLoggedIn, async (req, res) => {
   try {
@@ -48,14 +48,14 @@ router.post('/', ensureLoggedIn, async (req, res) => {
   }
 });
 
-//Show action
+// Show action
 // GET /restaurants/:id
 router.get('/:id', async (req, res) => {
   const restaurant = await Restaurant.findById(req.params.id).populate('createdBy');
   res.render('restaurants/show.ejs', { restaurant });
 });
 
-//Edit action
+// Edit action
 //GET /restaurants/:id/edit
 router.get('/:id/edit', ensureLoggedIn, async (req, res) => {
   const restaurant = await Restaurant.findById(req.params.id);
@@ -65,7 +65,7 @@ router.get('/:id/edit', ensureLoggedIn, async (req, res) => {
   res.render('restaurants/edit.ejs', { restaurant, categories });
 });
 
-//Update action
+// Update action
 // PUT /restaurants/:id
 router.put('/:id', ensureLoggedIn, async (req, res) => {
   const restaurant = await Restaurant.findById(req.params.id);
@@ -76,6 +76,18 @@ router.put('/:id', ensureLoggedIn, async (req, res) => {
   restaurant.category = req.body.category;
   restaurant.cost = req.body.cost;
   restaurant.description = req.body.description;
+  await restaurant.save();
+  res.redirect(`/restaurants/${restaurant._id}`);
+});
+
+// Delete action
+// DELETE /restaurants/:id
+router.put('/:id/request-delete', ensureLoggedIn, async (req, res) => {
+  const restaurant = await Restaurant.findById(req.params.id);
+  if (!restaurant.createdBy.equals(req.user._id)) {
+    res.send('You cannot do that');
+  }
+  restaurant.requestDelete = true;
   await restaurant.save();
   res.redirect(`/restaurants/${restaurant._id}`);
 });

@@ -1,18 +1,38 @@
 <%- include('../partials/header.ejs') %>
 
-<h1><%= restaurant.name %></h1>
+  <h1>
+    <%= restaurant.name %>
+  </h1>
 
-<p><strong>Category:</strong> <%= restaurant.category %></p>
-<p><strong>Cost:</strong> <%= restaurant.cost %></p>
+  <p><strong>Category:</strong>
+    <%= restaurant.category %>
+  </p>
+  <p><strong>Cost:</strong>
+    <%= restaurant.cost %>
+  </p>
 
-<% if (restaurant.description) { %>
-  <p><strong>Description:</strong> <%= restaurant.description %></p>
-<% } %>
+  <% if (restaurant.description) { %>
+    <p><strong>Description:</strong>
+      <%= restaurant.description %>
+    </p>
+    <% } %>
 
-<% if (restaurant.createdBy) { %>
-  <p><strong>Added By:</strong> <%= restaurant.createdBy.username %></p>
-<% } %>
+      <% if (restaurant.createdBy) { %>
+        <p><strong>Added By:</strong>
+          <%= restaurant.createdBy.username %>
+        </p>
+        <% } %>
 
-<a href="/restaurants">Back to list</a>
+          <% if (user && restaurant.createdBy && user._id.toString()===restaurant.createdBy._id.toString()) { %>
+            <a href="/restaurants/<%= restaurant._id %>/edit">Edit</a>
 
-<%- include('../partials/footer.ejs') %>
+            <form action="/restaurants/<%= restaurant._id %>/request-delete" method="POST" style="display:inline;">
+              <input type="hidden" name="_method" value="PUT" />
+              <button type="submit">REQUEST DELETE</button>
+            </form>
+            <% } %>
+
+
+              <a href="/restaurants">Back to list</a>
+
+              <%- include('../partials/footer.ejs') %>
