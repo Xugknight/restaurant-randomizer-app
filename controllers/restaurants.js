@@ -55,4 +55,14 @@ router.get('/:id', async (req, res) => {
   res.render('restaurants/show.ejs', { restaurant });
 });
 
+//Edit action
+//GET /restaurants/:id/edit
+router.get('/:id/edit', ensureLoggedIn, async (req, res) => {
+  const restaurant = await Restaurant.findById(req.params.id);
+  if (!restaurant.createdBy.equals(req.user._id)) {
+    res.send('You cannot do that');
+  }
+  res.render('restaurants/edit.ejs', { restaurant, categories });
+});
+
 module.exports = router;
