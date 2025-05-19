@@ -44,7 +44,7 @@ router.post('/', ensureLoggedIn, async (req, res) => {
     res.redirect('/restaurants');
   } catch (err) {
     console.log(err);
-    res.redirect('restaurants/new');
+    res.redirect('/restaurants/new');
   }
 });
 
@@ -91,5 +91,13 @@ router.put('/:id/request-delete', ensureLoggedIn, async (req, res) => {
   await restaurant.save();
   res.redirect(`/restaurants/${restaurant._id}`);
 });
+
+//TODO
+/*
+Build edit.ejs form
+work on admin view to approve deletions
+work on randomizer functionality
+probably more that I'll think of or run into later.
+*/
 
 module.exports = router;
