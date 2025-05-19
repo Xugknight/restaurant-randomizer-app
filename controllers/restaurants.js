@@ -48,4 +48,11 @@ router.post('/', ensureLoggedIn, async (req, res) => {
   }
 });
 
+//Show action
+// GET /restaurants/:id
+router.get('/:id', async (req, res) => {
+  const restaurant = await Restaurant.findById(req.params.id).populate('createdBy');
+  res.render('restaurants/show.ejs', { restaurant });
+});
+
 module.exports = router;

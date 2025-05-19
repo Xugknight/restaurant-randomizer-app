@@ -1,5 +1,18 @@
 <%- include('../partials/header.ejs') %>
 
+<h1><%= restaurant.name %></h1>
 
+<p><strong>Category:</strong> <%= restaurant.category %></p>
+<p><strong>Cost:</strong> <%= restaurant.cost %></p>
+
+<% if (restaurant.description) { %>
+  <p><strong>Description:</strong> <%= restaurant.description %></p>
+<% } %>
+
+<% if (restaurant.createdBy) { %>
+  <p><strong>Added By:</strong> <%= restaurant.createdBy.username %></p>
+<% } %>
+
+<a href="/restaurants">Back to list</a>
 
 <%- include('../partials/footer.ejs') %>
