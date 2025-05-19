@@ -29,9 +29,23 @@ router.get('/', async (req, res) => {
   });
 });
 
+// New action
 // GET /restaurants/new
 router.get('/new', ensureLoggedIn, (req, res) => {
   res.render('restaurants/new.ejs', { categories });
+});
+
+//Create action
+// POST /restaurants
+router.post('/', ensureLoggedIn, async (req, res) => {
+  try {
+    req.body.createdBy = req.user._id;
+    await Restaurant.create(req.body);
+    res.redirect('/restaurants');
+  } catch (err) {
+    console.log(err);
+    res.redirect('restaurants/new');
+  }
 });
 
 module.exports = router;
