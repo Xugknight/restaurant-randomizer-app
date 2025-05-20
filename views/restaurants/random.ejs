@@ -3,7 +3,7 @@
     <h1>🎲 RESTAURANT RANDOMIZER! 🎲</h1>
 
     <form method="GET" action="/restaurants/random" style="margin-bottom:1.5rem;">
-        <fieldset>
+        <fieldset class="categories">
             <legend>Filter by Category</legend>
             <% categories.forEach((category) => { %>
                 <label style="margin-right:1rem;">
@@ -11,7 +11,7 @@
                 <% }); %>
         </fieldset>
 
-        <fieldset style="margin-top:1rem;">
+        <fieldset class="costs">
             <legend>Filter by Cost</legend>
             <% costs.forEach((cost) => { %>
                 <label style="margin-right:1rem;">

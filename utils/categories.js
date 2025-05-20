@@ -16,4 +16,5 @@ module.exports = [
   'Greek',
   'Korean',
   'Spanish',
+  'Fusion',
 ];
