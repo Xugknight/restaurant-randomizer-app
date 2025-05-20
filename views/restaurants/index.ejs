@@ -28,6 +28,7 @@
                 </label>
                 <button type="submit">FILTER</button>
             </form>
+            <p><a href="/restaurants/random?category=<%= selectedCategory %>&cost=<%= selectedCost %>">🎲 RANDOMIZE!</a></p>
 
             <% if (restaurants.length === 0) { %>
                 <p>No restaurants match your criteria.</p>

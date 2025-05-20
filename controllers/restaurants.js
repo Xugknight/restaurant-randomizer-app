@@ -48,6 +48,24 @@ router.post('/', ensureLoggedIn, async (req, res) => {
   }
 });
 
+// Randomizer
+// GET /restaurants/random
+router.get('/random', async (req, res) => {
+  const filter = { requestDelete: false };
+  if (req.query.category) {
+    filter.category = req.query.category;
+  }
+  if (req.query.cost) {
+    filter.cost = req.query.cost;
+  }
+  const count = await Restaurant.countDocuments(filter);
+  if (count === 0) return res.redirect('/restaurants');
+
+  const randomIndex = Math.floor(Math.random() * count);
+  const randomRestaurant = await Restaurant.findOne(filter).skip(randomIndex);
+  res.redirect(`/restaurants/${randomRestaurant._id}`);
+});
+
 // Show action
 // GET /restaurants/:id
 router.get('/:id', async (req, res) => {
@@ -94,7 +112,6 @@ router.put('/:id/request-delete', ensureLoggedIn, async (req, res) => {
 
 //TODO
 /*
-Build edit.ejs form
 work on admin view to approve deletions
 work on randomizer functionality
 probably more that I'll think of or run into later.
