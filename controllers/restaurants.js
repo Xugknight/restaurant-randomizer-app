@@ -73,7 +73,7 @@ router.get('/random', async (req, res) => {
     categories,
     costs: ['$', '$$', '$$$'],
     selectedCategories,
-    electedCosts
+    selectedCosts
   });
 });
 
