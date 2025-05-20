@@ -1,31 +1,29 @@
 <%- include('../partials/header.ejs') %>
 
-    <h1>Add a New Restaurant!</h1>
+    <h1>ADD A NEW RESTAURANT!</h1>
 
     <form action="/restaurants" method="POST">
-        <label for="name">Name:</label><br />
-        <input type="text" name="name" id="name" required /><br /><br />
+        <label for="name">Name:</label><br>
+        <input type="text" name="name" id="name" required />
+        <br><br>
 
-        <label for="category">Category:</label><br />
+        <label for="category">Category:</label><br>
         <select name="category" id="category" required>
             <option value="">Select...</option>
-            <% categories.forEach((category) => { %>
-                <option value="<%= category %>">
-                    <%= category %>
-                </option>
+            <% categories.forEach((category)=> { %>
+                <option value="<%= category %>"><%= category %></option>
                 <% }) %>
-        </select><br /><br />
+        </select><br><br>
 
-
-        <label for="cost">Cost:</label><br />
+        <label for="cost">Cost:</label><br>
         <select name="cost" id="cost" required>
             <option value="">Select...</option>
             <option value="$">$</option>
             <option value="$$">$$</option>
             <option value="$$$">$$$</option>
-        </select><br /><br />
+        </select><br><br>
 
-        <label for="description">Description:</label><br />
+        <label for="description">Description:</label><br>
         <textarea name="description" id="description" rows="4" maxlength="300"></textarea><br /><br />
 
         <button type="submit">ADD!</button>

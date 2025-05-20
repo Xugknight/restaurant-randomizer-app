@@ -1,5 +1,35 @@
 <%- include('../partials/header.ejs') %>
 
+    <h1>EDIT “<%= restaurant.name %>”</h1>
 
+    <form action="/restaurants/<%= restaurant._id %>?_method=PUT" method="POST">
 
-<%- include('../partials/footer.ejs') %>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" value="<%= restaurant.name %>" required />
+        <br><br>
+
+        <label for="category">Category:</label><br>
+        <select id="category" name="category" required>
+            <% categories.forEach(category=> { %>
+                <option value="<%= category %>" <%=restaurant.category === category ? 'selected' : '' %>><%= category %></option>
+                <% }) %>
+        </select>
+        <br><br>
+
+        <label for="cost">Cost:</label><br>
+        <select id="cost" name="cost" required>
+            <option value="$" <%=restaurant.cost === '$' ? 'selected' : '' %>>$</option>
+            <option value="$$" <%=restaurant.cost === '$$' ? 'selected' : '' %>>$$</option>
+            <option value="$$$" <%=restaurant.cost === '$$$' ? 'selected' : '' %>>$$$</option>
+        </select>
+        <br><br>
+
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description" rows="4"
+            maxlength="300"><%= restaurant.description || '' %></textarea><br><br>
+
+        <button type="submit">SAVE</button>
+        <a href="/restaurants/<%= restaurant._id %>">CANCEL</a>
+    </form>
+
+    <%- include('../partials/footer.ejs') %>
