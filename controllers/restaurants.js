@@ -51,19 +51,30 @@ router.post('/', ensureLoggedIn, async (req, res) => {
 // Randomizer
 // GET /restaurants/random
 router.get('/random', async (req, res) => {
+  const selectedCategories = [].concat(req.query.category || []);
+  const selectedCosts = [].concat(req.query.cost || []);
+
   const filter = { requestDelete: false };
-  if (req.query.category) {
-    filter.category = req.query.category;
+  if (selectedCategories.length > 0) {
+    filter.category = { $in: selectedCategories };
   }
-  if (req.query.cost) {
-    filter.cost = req.query.cost;
+  if (selectedCosts.length > 0) {
+    filter.cost = { $in: selectedCosts };
   }
+
   const count = await Restaurant.countDocuments(filter);
   if (count === 0) return res.redirect('/restaurants');
 
   const randomIndex = Math.floor(Math.random() * count);
   const randomRestaurant = await Restaurant.findOne(filter).skip(randomIndex);
-  res.redirect(`/restaurants/${randomRestaurant._id}`);
+
+  res.render('restaurants/random.ejs', {
+    restaurant: randomRestaurant,
+    categories,
+    costs: ['$', '$$', '$$$'],
+    selectedCategories,
+    electedCosts
+  });
 });
 
 // Show action
@@ -113,8 +124,9 @@ router.put('/:id/request-delete', ensureLoggedIn, async (req, res) => {
 //TODO
 /*
 work on admin view to approve deletions
-work on randomizer functionality
-probably more that I'll think of or run into later.
+make reviews
+make favorites
+randomize favorites?
 */
 
 module.exports = router;

@@ -10,9 +10,9 @@
 
         <label for="category">Category:</label><br>
         <select id="category" name="category" required>
-            <% categories.forEach(category=> { %>
+            <% categories.forEach((category) => { %>
                 <option value="<%= category %>" <%=restaurant.category === category ? 'selected' : '' %>><%= category %></option>
-                <% }) %>
+                <% }); %>
         </select>
         <br><br>
 

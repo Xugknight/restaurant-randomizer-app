@@ -1,0 +1,52 @@
+<%- include('../partials/header.ejs') %>
+
+    <h1>🎲 RESTAURANT RANDOMIZER! 🎲</h1>
+
+    <form method="GET" action="/restaurants/random" style="margin-bottom:1.5rem;">
+        <fieldset>
+            <legend>Filter by Category</legend>
+            <% categories.forEach((category) => { %>
+                <label style="margin-right:1rem;">
+                    <input type="checkbox" name="category" value="<%= category %>" <%=selectedCategories.includes(category) ? 'checked' : '' %> /><%= category %></label>
+                <% }); %>
+        </fieldset>
+
+        <fieldset style="margin-top:1rem;">
+            <legend>Filter by Cost</legend>
+            <% costs.forEach((cost) => { %>
+                <label style="margin-right:1rem;">
+                    <input type="checkbox" name="cost" value="<%= cost %>" <%=selectedCosts.includes(cost) ? 'checked' : '' %>/><%= cost %></label>
+                <% }); %>
+        </fieldset>
+        <button type="submit" style="margin-top:1rem;">Roll!</button>
+    </form>
+
+    <% if (restaurant) { %>
+        <h2>🎉 You got: 🎉</h2>
+        <p><strong><a href="/restaurants/<%= restaurant._id %>">
+                    <%= restaurant.name %>
+                </a></strong></p>
+        <p>
+            <%= restaurant.category %> — <%= restaurant.cost %>
+        </p>
+        <% if (restaurant.description) { %>
+            <p><em>
+                <%= restaurant.description %>
+            </em></p>
+            <% } %>
+                <form method="GET" action="/restaurants/random">
+                    <% selectedCategories.forEach((category) => { %>
+                        <input type="hidden" name="category" value="<%= category %>" />
+                        <% }); %>
+                    <% selectedCosts.forEach((cost) => { %>
+                        <input type="hidden" name="cost" value="<%= cost %>" />
+                        <% }); %>
+                    <button type="submit">🔄 RE-ROLL 🔄</button>
+                </form>
+                <% } else { %>
+                    <p>NO MATCHES! ADJUST FILTERS AND ROLL AGAIN!</p>
+                    <% }; %>
+
+    <p style="margin-top:1.5rem;"><a href="/restaurants">← BACK</a></p>
+
+<%- include('../partials/footer.ejs') %>

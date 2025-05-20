@@ -1,47 +1,47 @@
 <%- include('../partials/header.ejs') %>
 
-    <h1>All Restaurants!</h1>
+<h1>All Restaurants!</h1>
+<a href="/restaurants/random">🎲 RANDOM 🎲</a>
 
-    <% if (user) { %>
-        <p><a href="/restaurants/new">➕ ADD RESTAURANT</a></p>
-        <% } %>
+<% if (user) { %>
+<p><a href="/restaurants/new">➕ ADD RESTAURANT</a></p>
+<% } %>
 
-            <form method="GET" action="/restaurants">
-                <label>
-                    Category:
-                    <select name="category">
-                        <option value="">All</option>
-                        <% categories.forEach((category)=> { %>
-                            <option value="<%= category %>" <%= selectedCategory === category ? 'selected' : '' %>><%= category %></option>
-                            <% }) %>
-                    </select>
-                </label>
+    <form method="GET" action="/restaurants">
+        <label>
+            Category:
+            <select name="category">
+                <option value="">All</option>
+                <% categories.forEach((category)=> { %>
+                    <option value="<%= category %>" <%= selectedCategory === category ? 'selected' : '' %>><%= category %></option>
+                    <% }) %>
+            </select>
+        </label>
 
-                <label>
-                    Cost:
-                    <select name="cost">
-                        <option value="">All</option>
-                        <option value="$" <%= selectedCost ==='$' ? 'selected' : '' %>>$</option>
-                        <option value="$$" <%= selectedCost ==='$$' ? 'selected' : '' %>>$$</option>
-                        <option value="$$$" <%= selectedCost ==='$$$' ? 'selected' : '' %>>$$$</option>
-                    </select>
-                </label>
-                <button type="submit">FILTER</button>
-            </form>
-            <p><a href="/restaurants/random?category=<%= selectedCategory %>&cost=<%= selectedCost %>">🎲 RANDOMIZE!</a></p>
+        <label>
+            Cost:
+            <select name="cost">
+                <option value="">All</option>
+                <option value="$" <%= selectedCost ==='$' ? 'selected' : '' %>>$</option>
+                <option value="$$" <%= selectedCost ==='$$' ? 'selected' : '' %>>$$</option>
+                <option value="$$$" <%= selectedCost ==='$$$' ? 'selected' : '' %>>$$$</option>
+            </select>
+        </label>
+        <button type="submit">FILTER</button>
+    </form>
 
-            <% if (restaurants.length === 0) { %>
-                <p>No restaurants match your criteria.</p>
-                <% } else { %>
-                    <ul>
-                        <% restaurants.forEach((restaurant)=> { %>
-                            <li>
-                                <a href="/restaurants/<%= restaurant._id %>">
-                                    <%= restaurant.name %>
-                                </a> - <%= restaurant.category %> - <%= restaurant.cost %>
-                            </li>
-                            <% }) %>
-                    </ul>
-                    <% } %>
+    <% if (restaurants.length === 0) { %>
+        <p>No restaurants match your criteria.</p>
+        <% } else { %>
+            <ul>
+                <% restaurants.forEach((restaurant)=> { %>
+                    <li>
+                        <a href="/restaurants/<%= restaurant._id %>">
+                            <%= restaurant.name %>
+                        </a> - <%= restaurant.category %> - <%= restaurant.cost %>
+                    </li>
+                    <% }) %>
+            </ul>
+            <% } %>
 
-                        <%- include('../partials/footer.ejs') %>
+<%- include('../partials/footer.ejs') %>
