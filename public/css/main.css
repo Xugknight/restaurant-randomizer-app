@@ -77,3 +77,9 @@ button:hover {
 .error-msg {
   color: rgb(223, 116, 116);
 }
+
+button.inline-button {
+  grid-column: span 2;
+  justify-self: center;
+  width: auto;
+}

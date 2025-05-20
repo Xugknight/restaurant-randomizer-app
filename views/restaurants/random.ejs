@@ -18,7 +18,7 @@
                     <input type="checkbox" name="cost" value="<%= cost %>" <%=selectedCosts.includes(cost) ? 'checked' : '' %>/><%= cost %></label>
                 <% }); %>
         </fieldset>
-        <button type="submit" style="margin-top:1rem;">Roll!</button>
+        <button type="submit" class="inline-button">ROLL THE 🎲!</button>
     </form>
 
     <% if (restaurant) { %>
@@ -41,7 +41,7 @@
                     <% selectedCosts.forEach((cost) => { %>
                         <input type="hidden" name="cost" value="<%= cost %>" />
                         <% }); %>
-                    <button type="submit">🔄 RE-ROLL 🔄</button>
+                    <button type="submit" class="inline-button">🔄 RE-ROLL 🔄</button>
                 </form>
                 <% } else { %>
                     <p>NO MATCHES! ADJUST FILTERS AND ROLL AGAIN!</p>
