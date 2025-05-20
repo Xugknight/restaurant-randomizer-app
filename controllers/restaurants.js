@@ -127,6 +127,7 @@ work on admin view to approve deletions
 make reviews
 make favorites
 randomize favorites?
+make sure no dupes in DB
 */
 
 module.exports = router;

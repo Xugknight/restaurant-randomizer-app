@@ -23,16 +23,10 @@
 
     <% if (restaurant) { %>
         <h2>🎉 You got: 🎉</h2>
-        <p><strong><a href="/restaurants/<%= restaurant._id %>">
-                    <%= restaurant.name %>
-                </a></strong></p>
-        <p>
-            <%= restaurant.category %> — <%= restaurant.cost %>
-        </p>
+        <p><strong><a href="/restaurants/<%= restaurant._id %>"><%= restaurant.name %></a></strong></p>
+        <p><%= restaurant.category %> — <%= restaurant.cost %></p>
         <% if (restaurant.description) { %>
-            <p><em>
-                <%= restaurant.description %>
-            </em></p>
+            <p><em><%= restaurant.description %></em></p>
             <% } %>
                 <form method="GET" action="/restaurants/random">
                     <% selectedCategories.forEach((category) => { %>

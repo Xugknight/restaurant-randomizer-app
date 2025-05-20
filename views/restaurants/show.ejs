@@ -1,26 +1,17 @@
 <%- include('../partials/header.ejs') %>
 
-  <h1>
-    <%= restaurant.name %>
-  </h1>
+  <h1><%= restaurant.name %></h1>
 
-  <p><strong>Category:</strong>
-    <%= restaurant.category %>
-  </p>
-  <p><strong>Cost:</strong>
-    <%= restaurant.cost %>
-  </p>
+  <p><strong>Category:</strong><%= restaurant.category %></p>
+
+  <p><strong>Cost:</strong><%= restaurant.cost %></p>
 
   <% if (restaurant.description) { %>
-    <p><strong>Description:</strong>
-      <%= restaurant.description %>
-    </p>
+    <p><strong>Description:</strong><%= restaurant.description %></p>
   <% } %>
 
 <% if (restaurant.createdBy) { %>
-    <p><strong>Added By:</strong>
-      <%= restaurant.createdBy.username %>
-    </p>
+    <p><strong>Added By:</strong><%= restaurant.createdBy.username %></p>
     <% } %>
 
         <% if (user && restaurant.createdBy && user._id.toString() === restaurant.createdBy._id.toString()) { %>

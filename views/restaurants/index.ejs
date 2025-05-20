@@ -36,11 +36,7 @@
         <% } else { %>
             <ul>
                 <% restaurants.forEach((restaurant)=> { %>
-                    <li>
-                        <a href="/restaurants/<%= restaurant._id %>">
-                            <%= restaurant.name %>
-                        </a> - <%= restaurant.category %> - <%= restaurant.cost %>
-                    </li>
+                    <li><a href="/restaurants/<%= restaurant._id %>"><%= restaurant.name %></a> - <%= restaurant.category %> - <%= restaurant.cost %></li>
                     <% }) %>
             </ul>
             <% } %>
