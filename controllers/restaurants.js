@@ -6,7 +6,7 @@ const categories = require('../utils/categories');
 
 // Middleware used to protect routes that need a logged in user
 const ensureLoggedIn = require('../middleware/ensure-logged-in');
-// router.use(ensureLoggedIn);
+const ensureAdmin = require('../middleware/ensure-admin');
 
 // ALL paths start with '/restaurants'
 
@@ -53,7 +53,6 @@ router.post('/', ensureLoggedIn, async (req, res) => {
 router.get('/random', async (req, res) => {
   const selectedCategories = [].concat(req.query.category || []);
   const selectedCosts = [].concat(req.query.cost || []);
-
   const filter = { requestDelete: false };
   if (selectedCategories.length > 0) {
     filter.category = { $in: selectedCategories };
@@ -61,13 +60,10 @@ router.get('/random', async (req, res) => {
   if (selectedCosts.length > 0) {
     filter.cost = { $in: selectedCosts };
   }
-
   const count = await Restaurant.countDocuments(filter);
   if (count === 0) return res.redirect('/restaurants');
-
   const randomIndex = Math.floor(Math.random() * count);
   const randomRestaurant = await Restaurant.findOne(filter).skip(randomIndex);
-
   res.render('restaurants/random.ejs', {
     restaurant: randomRestaurant,
     categories,
@@ -75,6 +71,13 @@ router.get('/random', async (req, res) => {
     selectedCategories,
     selectedCosts
   });
+});
+
+// Admin View
+// GET /restaurants/admin
+router.get('/admin', ensureLoggedIn, ensureAdmin, async (req, res) => {
+  const pendingDeletes = await Restaurant.find({ requestDelete: true }).populate('createdBy');
+  res.render('restaurants/admin.ejs', { pendingDeletes });
 });
 
 // Show action
@@ -88,7 +91,7 @@ router.get('/:id', async (req, res) => {
 //GET /restaurants/:id/edit
 router.get('/:id/edit', ensureLoggedIn, async (req, res) => {
   const restaurant = await Restaurant.findById(req.params.id);
-  if (!restaurant.createdBy.equals(req.user._id)) {
+  if (!restaurant.createdBy.equals(req.user._id) && !req.user.isAdmin) {
     res.send('You cannot do that');
   }
   res.render('restaurants/edit.ejs', { restaurant, categories });
@@ -98,7 +101,7 @@ router.get('/:id/edit', ensureLoggedIn, async (req, res) => {
 // PUT /restaurants/:id
 router.put('/:id', ensureLoggedIn, async (req, res) => {
   const restaurant = await Restaurant.findById(req.params.id);
-  if (!restaurant.createdBy.equals(req.user._id)) {
+  if (!restaurant.createdBy.equals(req.user._id) && !req.user.isAdmin) {
     res.send('You cannot do that');
   }
   restaurant.name = req.body.name;
@@ -109,8 +112,17 @@ router.put('/:id', ensureLoggedIn, async (req, res) => {
   res.redirect(`/restaurants/${restaurant._id}`);
 });
 
-// Delete action
-// DELETE /restaurants/:id
+// Cancel Delete
+// PUT /restaurants/:id/cancel-delete
+router.put('/:id/cancel-delete', ensureLoggedIn, ensureAdmin, async (req, res) => {
+  const restaurant = await Restaurant.findById(req.params.id);
+  restaurant.requestDelete = false;
+  await restaurant.save();
+  res.redirect('/restaurants/admin');
+});
+
+// Delete Request
+// PUT /restaurants/:id
 router.put('/:id/request-delete', ensureLoggedIn, async (req, res) => {
   const restaurant = await Restaurant.findById(req.params.id);
   if (!restaurant.createdBy.equals(req.user._id)) {
@@ -118,12 +130,18 @@ router.put('/:id/request-delete', ensureLoggedIn, async (req, res) => {
   }
   restaurant.requestDelete = true;
   await restaurant.save();
-  res.redirect(`/restaurants/${restaurant._id}`);
+  res.redirect(`/restaurants`);
+});
+
+// Delete action
+// DELETE /restaurants/:id
+router.delete('/:id', ensureLoggedIn, ensureAdmin, async (req, res) => {
+  await Restaurant.findByIdAndDelete(req.params.id);
+  res.redirect('/restaurants/admin');
 });
 
 //TODO
 /*
-work on admin view to approve deletions
 make reviews
 make favorites
 randomize favorites?

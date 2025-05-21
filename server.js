@@ -28,7 +28,6 @@ app.use(session({
 // If a user is logged in, add the user's doc to req.user and res.locals.user
 app.use(require('./middleware/add-user-to-req-and-locals'));
 
-
 // Routes below
 
 // GET / (root/default) -> Home Page
@@ -39,8 +38,6 @@ app.get('/', (req, res) => {
 // Controllers
 app.use('/auth', require('./controllers/auth'));
 app.use('/restaurants', require('./controllers/restaurants'));
-app.use('/admin', require('./controllers/admin'));
-
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);

@@ -1,0 +1,27 @@
+<%- include('../partials/header') %>
+
+<h1>🗑️ PENDING DELETE REQUESTS 🗑️</h1>
+
+<% if (pendingDeletes.length === 0) { %>
+  <p>No requests at this time.</p>
+<% } else { %>
+  <ul>
+    <% pendingDeletes.forEach((restaurant) => { %>
+      <li>
+        <strong><%= restaurant.name %></strong> — <%= restaurant.category %> <%= restaurant.cost %>
+        <br>
+        Requested by: <%= restaurant.createdBy?.username || 'Unknown' %>
+        <form method="POST" action="/restaurants/<%= restaurant._id %>?_method=DELETE" style="display:inline;">
+          <button type="submit">APPROVE</button>
+        </form>
+        <form method="POST" action="/restaurants/<%= restaurant._id %>/cancel-delete?_method=PUT" style="display:inline;">
+          <button type="submit">DENY</button>
+        </form>
+      </li>
+    <% }); %>
+  </ul>
+<% } %>
+
+<a href="/restaurants">← BACK</a>
+
+<%- include('../partials/footer') %>
