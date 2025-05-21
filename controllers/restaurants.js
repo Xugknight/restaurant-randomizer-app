@@ -80,13 +80,6 @@ router.get('/admin', ensureLoggedIn, ensureAdmin, async (req, res) => {
   res.render('restaurants/admin.ejs', { pendingDeletes });
 });
 
-// Show action
-// GET /restaurants/:id
-router.get('/:id', async (req, res) => {
-  const restaurant = await Restaurant.findById(req.params.id).populate('createdBy');
-  res.render('restaurants/show.ejs', { restaurant });
-});
-
 // Edit action
 //GET /restaurants/:id/edit
 router.get('/:id/edit', ensureLoggedIn, async (req, res) => {
@@ -95,21 +88,6 @@ router.get('/:id/edit', ensureLoggedIn, async (req, res) => {
     res.send('You cannot do that');
   }
   res.render('restaurants/edit.ejs', { restaurant, categories });
-});
-
-// Update action
-// PUT /restaurants/:id
-router.put('/:id', ensureLoggedIn, async (req, res) => {
-  const restaurant = await Restaurant.findById(req.params.id);
-  if (!restaurant.createdBy.equals(req.user._id) && !req.user.isAdmin) {
-    res.send('You cannot do that');
-  }
-  restaurant.name = req.body.name;
-  restaurant.category = req.body.category;
-  restaurant.cost = req.body.cost;
-  restaurant.description = req.body.description;
-  await restaurant.save();
-  res.redirect(`/restaurants/${restaurant._id}`);
 });
 
 // Cancel Delete
@@ -131,6 +109,28 @@ router.put('/:id/request-delete', ensureLoggedIn, async (req, res) => {
   restaurant.requestDelete = true;
   await restaurant.save();
   res.redirect(`/restaurants`);
+});
+
+// Show action
+// GET /restaurants/:id
+router.get('/:id', async (req, res) => {
+  const restaurant = await Restaurant.findById(req.params.id).populate('createdBy');
+  res.render('restaurants/show.ejs', { restaurant });
+});
+
+// Update action
+// PUT /restaurants/:id
+router.put('/:id', ensureLoggedIn, async (req, res) => {
+  const restaurant = await Restaurant.findById(req.params.id);
+  if (!restaurant.createdBy.equals(req.user._id) && !req.user.isAdmin) {
+    res.send('You cannot do that');
+  }
+  restaurant.name = req.body.name;
+  restaurant.category = req.body.category;
+  restaurant.cost = req.body.cost;
+  restaurant.description = req.body.description;
+  await restaurant.save();
+  res.redirect(`/restaurants/${restaurant._id}`);
 });
 
 // Delete action
