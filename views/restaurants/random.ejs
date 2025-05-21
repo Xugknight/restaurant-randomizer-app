@@ -3,21 +3,28 @@
     <h1>🎲 RESTAURANT RANDOMIZER! 🎲</h1>
 
     <form method="GET" action="/restaurants/random" style="margin-bottom:1.5rem;">
-        <fieldset class="categories">
-            <legend>Filter by Category</legend>
+        <label><strong>Categories:</strong><br>
+            <small>
+            Hold Ctrl (Windows) or ⌘ (Mac) to select multiple
+            </small>
+            <select name="category" multiple size="5">
             <% categories.forEach((category) => { %>
-                <label style="margin-right:1rem;">
-                    <input type="checkbox" name="category" value="<%= category %>" <%=selectedCategories.includes(category) ? 'checked' : '' %> /><%= category %></label>
-                <% }); %>
-        </fieldset>
+                <option value="<%= category %>" <%= selectedCategories.includes(category) ? 'selected' : '' %>><%= category %></option>
+            <% }) %>
+            </select>
+        </label>
 
-        <fieldset class="costs">
-            <legend>Filter by Cost</legend>
+        <label style="margin-left:1rem;">
+            <strong>Cost:</strong><br>
+            <small>Leaving cost blank means "any cost".</small>
+            <select name="cost">
+            <option value="">Any</option>
             <% costs.forEach((cost) => { %>
-                <label style="margin-right:1rem;">
-                    <input type="checkbox" name="cost" value="<%= cost %>" <%=selectedCosts.includes(cost) ? 'checked' : '' %>/><%= cost %></label>
-                <% }); %>
-        </fieldset>
+                <option value="<%= cost %>" <%= selectedCosts.includes(cost) ? 'selected' : '' %>><%= cost %></option>
+            <% }) %>
+            </select>
+        </label>
+        <br>
         <button type="submit" class="inline-button">ROLL THE 🎲!</button>
     </form>
 

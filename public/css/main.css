@@ -86,15 +86,8 @@ button.inline-button {
   width: auto;
 }
 
-fieldset.categories {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 1rem;
-}
-
-fieldset.costs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
+small {
+  display: block;
+  font-size: 12px;
+  color: gray;
 }
