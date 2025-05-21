@@ -39,6 +39,7 @@ app.get('/', (req, res) => {
 // Controllers
 app.use('/auth', require('./controllers/auth'));
 app.use('/restaurants', require('./controllers/restaurants'));
+app.use('/admin', require('./controllers/admin'));
 
 
 app.listen(port, () => {
