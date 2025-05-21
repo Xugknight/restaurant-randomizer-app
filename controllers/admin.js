@@ -15,4 +15,18 @@ router.get('/delete-requests', async (req, res) => {
     res.render('admin/delete-requests.ejs', { pendingDelete });
 });
 
+// Approve
+// PUT /admin/delete-requests/:id/approve
+router.put('/delete-requests/:id/approve', async (req, res) => {
+    await Restaurant.findByIdAndDelete(req.params.id);
+    res.redirect('/admin/delete-requests');
+});
+
+// Reject
+// PUT /admin/delete-requets/:id/reject
+router.put('/delete-requests/:id/reject', async (req, res) => {
+    await Restaurant.findByIdAndUpdate(req.params.id, { requestDelete: false });
+    res.redirect('/admin/delete-requests');
+});
+
 module.exports = router;

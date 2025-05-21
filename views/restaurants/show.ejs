@@ -17,7 +17,7 @@
         <% if (user && restaurant.createdBy && user._id.toString() === restaurant.createdBy._id.toString()) { %>
           <a href="/restaurants/<%= restaurant._id %>/edit">Edit</a>
 
-          <form action="/restaurants/<%= restaurant._id %>/request-delete" method="POST" style="display:inline;">
+          <form action="/restaurants/<%= restaurant._id %>/request-delete?_method=PUT" method="POST" style="display:inline;">
             <input type="hidden" name="_method" value="PUT" />
             <button type="submit">REQUEST DELETE</button>
           </form>

@@ -1,0 +1,27 @@
+<%- include('../partials/header.ejs') %>
+
+<h1>RESTAURANTS PENDING DELETE</h1>
+
+<% if (pending.length === 0) { %>
+  <p>No requests currently.</p>
+<% } else { %>
+  <table>
+    <tr><th>Name</th><th>Owner</th><th>Actions</th></tr>
+    <% pending.forEach(request => { %>
+      <tr>
+        <td><%= request.name %></td>
+        <td><%= request.createdBy.username %></td>
+        <td>
+          <form method="POST" action="/admin/delete-requests/<%= r._id %>/approve?_method=PUT" style="display:inline">
+            <button>APPROVE</button>
+          </form>
+          <form method="POST" action="/admin/delete-requests/<%= r._id %>/reject?_method=PUT" style="display:inline">
+            <button>REJECT</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </table>
+<% } %>
+
+<%- include('../partials/footer.ejs') %>
