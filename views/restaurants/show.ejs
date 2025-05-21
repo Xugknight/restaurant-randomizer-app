@@ -14,7 +14,7 @@
     <p><strong>Added By:</strong><%= restaurant.createdBy.username %></p>
     <% } %>
 
-        <% if (user && restaurant.createdBy && user._id.toString() === restaurant.createdBy._id.toString()) { %>
+        <% if (user && restaurant.createdBy && (user._id.toString() === restaurant.createdBy._id.toString() || user.isAdmin)) { %>
           <a href="/restaurants/<%= restaurant._id %>/edit">Edit</a>
 
           <form action="/restaurants/<%= restaurant._id %>/request-delete?_method=PUT" method="POST" style="display:inline;">
