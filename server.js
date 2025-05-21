@@ -38,6 +38,7 @@ app.get('/', (req, res) => {
 // Controllers
 app.use('/auth', require('./controllers/auth'));
 app.use('/restaurants', require('./controllers/restaurants'));
+app.use('/favorites', require('./controllers/favorites'));
 
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);

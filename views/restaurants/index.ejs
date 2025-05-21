@@ -13,7 +13,7 @@
             Category:
             <select name="category">
                 <option value="">All</option>
-                <% categories.forEach((category)=> { %>
+                <% categories.sort().forEach((category)=> { %>
                     <option value="<%= category %>" <%= selectedCategory === category ? 'selected' : '' %>><%= category %></option>
                     <% }) %>
             </select>

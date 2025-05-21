@@ -1,27 +1,33 @@
 <%- include('../partials/header.ejs') %>
 
-  <h1><%= restaurant.name %></h1>
+<h1><%= restaurant.name %></h1>
 
-  <p><strong>Category:</strong><%= restaurant.category %></p>
+<p><strong>Category:</strong><%= restaurant.category %></p>
 
-  <p><strong>Cost:</strong><%= restaurant.cost %></p>
+<p><strong>Cost:</strong><%= restaurant.cost %></p>
 
-  <% if (restaurant.description) { %>
-    <p><strong>Description:</strong><%= restaurant.description %></p>
-  <% } %>
+<% if (restaurant.description) { %>
+  <p><strong>Description:</strong><%= restaurant.description %></p>
+<% } %>
 
 <% if (restaurant.createdBy) { %>
     <p><strong>Added By:</strong><%= restaurant.createdBy.username %></p>
     <% } %>
 
-        <% if (user && restaurant.createdBy && (user._id.toString() === restaurant.createdBy._id.toString() || user.isAdmin)) { %>
-          <a href="/restaurants/<%= restaurant._id %>/edit">Edit</a>
+<% if (user && restaurant) { %>
+  <% const isFavorited = favoriteIds.includes(restaurant._id.toString()); %>
+  <form action="/favorites/<%= restaurant._id %>?_method=<%= isFavorited ? 'DELETE' : 'POST' %>" method="POST" style="display:inline;">
+    <button><%= isFavorited ? '❌' : '❤️' %></button>
+  </form>
+<% } %>
 
-          <form action="/restaurants/<%= restaurant._id %>/request-delete?_method=PUT" method="POST" style="display:inline;">
-            <input type="hidden" name="_method" value="PUT" />
-            <button type="submit">REQUEST DELETE</button>
-          </form>
-          <% } %>
+<% if (user && restaurant.createdBy && (user._id.toString() === restaurant.createdBy._id.toString() || user.isAdmin)) { %>
+  <a href="/restaurants/<%= restaurant._id %>/edit">Edit</a>
+  <form action="/restaurants/<%= restaurant._id %>/request-delete?_method=PUT" method="POST" style="display:inline;">
+    <input type="hidden" name="_method" value="PUT" />
+    <button type="submit">REQUEST DELETE</button>
+  </form>
+  <% } %>
 
   <a href="/restaurants/random">🎲 FIND ANOTHER! 🎲</a>
   <a href="/restaurants">BACK TO LIST!</a>
