@@ -20,7 +20,10 @@ router.get('/', async (req, res) => {
   if (req.query.cost) {
     filter.cost = req.query.cost;
   }
-  const restaurants = await Restaurant.find(filter);
+  const restaurants = await Restaurant
+  .find(filter)
+  .collation({ locale: 'en', strength: 2 })
+  .sort('name');
   res.render('restaurants/index.ejs', { 
     restaurants, 
     categories,
