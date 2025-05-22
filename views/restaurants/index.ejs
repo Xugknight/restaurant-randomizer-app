@@ -1,49 +1,56 @@
 <%- include('../partials/header.ejs') %>
 
-<a href="/restaurants/random">🎲 RANDOM 🎲</a>
-<br>
-<h1>All Restaurants!</h1>
+<main class="index-container">
+  <div class="top-actions">
+    <a href="/restaurants/random" class="btn">🎲 RANDOM 🎲</a>
+    <% if (user) { %>
+      <a href="/restaurants/new" class="btn">➕ ADD RESTAURANT</a>
+    <% } %>
+  </div>
 
-<% if (user) { %>
-<p><a href="/restaurants/new">➕ ADD RESTAURANT</a></p>
-<% } %>
-    <form method="GET" action="/restaurants">
-        
-        <label>
-            Category:
-            <select name="category">
-                <option value="">All</option>
-                <% categories.sort().forEach((category)=> { %>
-                    <option value="<%= category %>" <%= selectedCategory === category ? 'selected' : '' %>><%= category %></option>
-                    <% }) %>
-                </select>
-            </label>
-            
-            <label>
-                Cost:
-                <select name="cost">
-                    <option value="">All</option>
-                    <option value="$" <%= selectedCost ==='$' ? 'selected' : '' %>>$</option>
-                    <option value="$$" <%= selectedCost ==='$$' ? 'selected' : '' %>>$$</option>
-                    <option value="$$$" <%= selectedCost ==='$$$' ? 'selected' : '' %>>$$$</option>
-                </select>
-            </label>
-            
-            <label>
-                <input type="checkbox" name="myRestaurants" value="true"<%= myRestaurantsSelected ? 'checked' : '' %>>
-                Show restaurants I've added
-            </label>
-        <button type="submit">FILTER</button>
-    </form>
+  <h1>ALL RESTAURANTS</h1>
 
-    <% if (restaurants.length === 0) { %>
-        <p>No restaurants match your criteria.</p>
-        <% } else { %>
-            <ul>
-                <% restaurants.forEach((restaurant)=> { %>
-                    <li><a href="/restaurants/<%= restaurant._id %>"><%= restaurant.name %></a> - <%= restaurant.category %> - <%= restaurant.cost %></li>
-                    <% }) %>
-            </ul>
-            <% } %>
+  <form method="GET" action="/restaurants" class="filter-form">
+    <label>
+      Category:
+      <select name="category">
+        <option value="">All</option>
+        <% categories.sort().forEach((category)=> { %>
+          <option value="<%= category %>" <%= selectedCategory === category ? 'selected' : '' %>><%= category %></option>
+        <% }) %>
+      </select>
+    </label>
+
+    <label>
+      Cost:
+      <select name="cost">
+        <option value="">All</option>
+        <option value="$" <%= selectedCost ==='$' ? 'selected' : '' %>>$</option>
+        <option value="$$" <%= selectedCost ==='$$' ? 'selected' : '' %>>$$</option>
+        <option value="$$$" <%= selectedCost ==='$$$' ? 'selected' : '' %>>$$$</option>
+      </select>
+    </label>
+
+    <label class="checkbox-label">
+      <input type="checkbox" name="myRestaurants" value="true" <%= myRestaurantsSelected ? 'checked' : '' %>>
+      ONLY SHOW RESTAURANTS I'VE ADDED
+    </label>
+
+    <button type="submit">FILTER</button>
+  </form>
+
+  <% if (restaurants.length === 0) { %>
+    <p>No restaurants match your criteria.</p>
+  <% } else { %>
+    <ul class="restaurant-list">
+      <% restaurants.forEach((restaurant)=> { %>
+        <li>
+          <a href="/restaurants/<%= restaurant._id %>"><%= restaurant.name %></a>
+          - <span class="details"><%= restaurant.category %> - <%= restaurant.cost %></span>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+</main>
 
 <%- include('../partials/footer.ejs') %>

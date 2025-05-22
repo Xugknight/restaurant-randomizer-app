@@ -1,59 +1,67 @@
 <%- include('../partials/header.ejs') %>
 
-    <h1>🎲 RESTAURANT RANDOMIZER! 🎲</h1>
+<main class="randomizer-container">
+  <h1>🎲 RESTAURANT RANDOMIZER! 🎲</h1>
 
-    <form method="GET" action="/restaurants/random" style="margin-bottom:1.5rem;">
-        
-        <label><strong>Categories:</strong><br>
-            <small>
-                Hold Ctrl (Windows) or ⌘ (Mac) to select multiple
-            </small>
-            <select name="category" multiple size="5">
-                <% categories.forEach((category) => { %>
-                    <option value="<%= category %>" <%= selectedCategories.includes(category) ? 'selected' : '' %>><%= category %></option>
-                    <% }) %>
-                </select>
-            </label>
-            
-            <label style="margin-left:1rem;">
-                <strong>Cost:</strong><br>
-                <small>Leaving cost blank means "any cost".</small>
-                <select name="cost">
-                    <option value="">Any</option>
-                    <% costs.forEach((cost) => { %>
-                        <option value="<%= cost %>" <%= selectedCosts.includes(cost) ? 'selected' : '' %>><%= cost %></option>
-                        <% }) %>
-                    </select>
-                </label>
-                
-                <label>
-                    <input type="checkbox" name="myRestaurants" value="true"<%= myRestaurantsSelected ? 'checked' : '' %>>
-                    Show restaurants I've added
-                </label>
-        <br>
-        <button type="submit" class="inline-button">ROLL THE 🎲!</button>
+  <form method="GET" action="/restaurants/random" class="randomizer-form">
+    <label>
+      <strong>Categories:</strong><br>
+      <small>Hold Ctrl (Windows) or ⌘ (Mac) to select multiple</small>
+      <select name="category" multiple size="5">
+        <% categories.forEach((category) => { %>
+          <option value="<%= category %>" <%= selectedCategories.includes(category) ? 'selected' : '' %>>
+            <%= category %>
+          </option>
+        <% }) %>
+      </select>
+    </label>
+
+    <label>
+      <strong>Cost:</strong><br>
+      <small>Leaving cost blank means "any cost".</small>
+      <select name="cost">
+        <option value="">Any</option>
+        <% costs.forEach((cost) => { %>
+          <option value="<%= cost %>" <%= selectedCosts.includes(cost) ? 'selected' : '' %>>
+            <%= cost %>
+          </option>
+        <% }) %>
+      </select>
+    </label>
+
+    <label class="checkbox-label">
+      <input type="checkbox" name="myRestaurants" value="true" <%= myRestaurantsSelected ? 'checked' : '' %> />
+      Show restaurants I've added
+    </label>
+
+    <button type="submit" class="btn">ROLL THE 🎲!</button>
+  </form>
+
+  <% if (restaurant) { %>
+    <h2>🎉 You got: 🎉</h2>
+    <p><strong><a href="/restaurants/<%= restaurant._id %>"><%= restaurant.name %></a></strong></p>
+    <p><%= restaurant.category %> — <%= restaurant.cost %></p>
+    <% if (restaurant.description) { %>
+      <p><em><%= restaurant.description %></em></p>
+    <% } %>
+
+    <form method="GET" action="/restaurants/random">
+      <% selectedCategories.forEach((category) => { %>
+        <input type="hidden" name="category" value="<%= category %>" />
+      <% }) %>
+      <% selectedCosts.forEach((cost) => { %>
+        <input type="hidden" name="cost" value="<%= cost %>" />
+      <% }) %>
+      <% if (myRestaurantsSelected) { %>
+        <input type="hidden" name="myRestaurants" value="true" />
+      <% } %>
+      <button type="submit" class="btn">🔄 RE-ROLL 🔄</button>
     </form>
+  <% } else { %>
+    <p>NO MATCHES! ADJUST FILTERS AND ROLL AGAIN!</p>
+  <% } %>
 
-    <% if (restaurant) { %>
-        <h2>🎉 You got: 🎉</h2>
-        <p><strong><a href="/restaurants/<%= restaurant._id %>"><%= restaurant.name %></a></strong></p>
-        <p><%= restaurant.category %> — <%= restaurant.cost %></p>
-        <% if (restaurant.description) { %>
-            <p><em><%= restaurant.description %></em></p>
-            <% } %>
-                <form method="GET" action="/restaurants/random">
-                    <% selectedCategories.forEach((category) => { %>
-                        <input type="hidden" name="category" value="<%= category %>" />
-                        <% }); %>
-                    <% selectedCosts.forEach((cost) => { %>
-                        <input type="hidden" name="cost" value="<%= cost %>" />
-                        <% }); %>
-                    <button type="submit" class="inline-button">🔄 RE-ROLL 🔄</button>
-                </form>
-                <% } else { %>
-                    <p>NO MATCHES! ADJUST FILTERS AND ROLL AGAIN!</p>
-                    <% }; %>
-
-    <p style="margin-top:1.5rem;"><a href="/restaurants">🔙 BACK</a></p>
+  <p><a href="/restaurants" class="back-link">🔙 BACK</a></p>
+</main>
 
 <%- include('../partials/footer.ejs') %>

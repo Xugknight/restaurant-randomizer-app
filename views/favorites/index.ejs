@@ -1,17 +1,22 @@
 <%- include('../partials/header.ejs') %>
 
-<h1>❤️ MY FAVORITES!</h1>
+<main class="favorites-container">
+  <h1>❤️ MY FAVORITES!</h1>
 
-<% if (favoriteRestaurants.length === 0) { %>
-  <p>You don't have any favorites!</p>
-<% } else { %>
-  <ul>
-    <% favoriteRestaurants.forEach((restaurant) => { %>
-      <li><a href="/restaurants/<%= restaurant._id %>"><%= restaurant.name %></a> — <%= restaurant.category %> — <%= restaurant.cost %></li>
-    <% }) %>
-  </ul>
-<% } %>
+  <% if (favoriteRestaurants.length === 0) { %>
+    <p>You don't have any favorites!</p>
+  <% } else { %>
+    <ul class="favorites-list">
+      <% favoriteRestaurants.forEach((restaurant) => { %>
+        <li>
+          <a href="/restaurants/<%= restaurant._id %>"><%= restaurant.name %></a> — 
+          <span class="details"><%= restaurant.category %> — <%= restaurant.cost %></span>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
 
-<a href="/restaurants">🔙 BACK</a>
+  <a href="/restaurants" class="back-link">🔙 BACK</a>
+</main>
 
 <%- include('../partials/footer.ejs') %>

@@ -1,27 +1,29 @@
 <%- include('../partials/header') %>
 
-<h1>🗑️ PENDING DELETE REQUESTS 🗑️</h1>
+<main class="admin-container">
+  <h1>🗑️ PENDING DELETE REQUESTS 🗑️</h1>
 
-<% if (pendingDeletes.length === 0) { %>
-  <p>No requests at this time.</p>
-<% } else { %>
-  <ul>
-    <% pendingDeletes.forEach((restaurant) => { %>
-      <li>
-        <strong><%= restaurant.name %></strong> — <%= restaurant.category %> <%= restaurant.cost %>
-        <br>
-        Requested by: <%= restaurant.createdBy?.username || 'Unknown' %>
-        <form method="POST" action="/restaurants/<%= restaurant._id %>?_method=DELETE" style="display:inline;">
-          <button type="submit">APPROVE</button>
-        </form>
-        <form method="POST" action="/restaurants/<%= restaurant._id %>/cancel-delete?_method=PUT" style="display:inline;">
-          <button type="submit">DENY</button>
-        </form>
-      </li>
-    <% }); %>
-  </ul>
-<% } %>
-
-<a href="/restaurants">← BACK</a>
+  <% if (pendingDeletes.length === 0) { %>
+    <p>No requests at this time.</p>
+  <% } else { %>
+    <ul class="pending-list">
+      <% pendingDeletes.forEach((restaurant) => { %>
+        <li>
+          <strong><%= restaurant.name %></strong> — <%= restaurant.category %> <%= restaurant.cost %><br>
+          Requested by: <%= restaurant.createdBy?.username || 'Unknown' %>
+          <div class="admin-actions">
+            <form method="POST" action="/restaurants/<%= restaurant._id %>?_method=DELETE">
+              <button type="submit" class="btn danger">APPROVE</button>
+            </form>
+            <form method="POST" action="/restaurants/<%= restaurant._id %>/cancel-delete?_method=PUT">
+              <button type="submit" class="btn warning">DENY</button>
+            </form>
+          </div>
+        </li>
+      <% }); %>
+    </ul>
+  <% } %>
+  <a href="/restaurants" class="back-link">← BACK</a>
+</main>
 
 <%- include('../partials/footer') %>
