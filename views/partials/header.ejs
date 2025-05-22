@@ -7,24 +7,33 @@
   <title>Restaurant Randomizer</title>
 </head>
 <body>
-  <nav>
-    <a href="/">🏠</a>
-    <div>
+  <nav class="site-nav">
+    <div class="nav-left">
+      <a class="logo" href="/">🏠</a>
       <a href="/restaurants">ALL RESTAURANTS</a>
-      <a href="/restaurants/random">🎲 RANDOM 🎲</a>
+      <a href="/restaurants/random">🎲 RANDOMIZER 🎲</a>
       <% if (user) { %>
-        <a href="/favorites">❤️MY FAVORITES</a>
-        <a href="/favorites/random">🎰RANDOM FAVORITE🎰</a>
-        <a href="/restaurants/new">ADD RESTAURANT</a>
-        <% if (user.isAdmin) {%>
-          <a href="/restaurants/admin">ADMIN</a>
-        <% } %>
-        <a href="/auth/sign-out">SIGN OUT</a>
-        <span><%= user.name %></span>
-      <% } else { %>
-        <a href="/auth/sign-up">SIGN UP</a>
-        <a href="/auth/sign-in">SIGN IN</a>
+      <a href="/favorites">❤️ MY FAVORITES</a>
       <% } %>
     </div>
+    
+    <div class="nav-right">
+        <% if (user) { %>
+        <% if (user.isAdmin) { %>
+        <a href="/restaurants/admin">ADMIN</a>
+        <% } %>
+        <details class="user-menu">
+          <summary><%= user.username %> ▾</summary>
+          <div class="dropdown">
+          <a href="/restaurants/new">➕ ADD RESTAURANT</a>
+          <a href="/favorites/random">🎲 RANDOM FAVORITE 🎰</a>
+          <a href="/auth/sign-out">SIGN OUT</a>
+    </div>
+    </details>
+  <% } else { %>
+    <a href="/auth/sign-in">SIGN IN</a>
+    <a href="/auth/sign-up">SIGN UP</a>
+  <% } %>
+  </div>
   </nav>
-  <main>
+<main>

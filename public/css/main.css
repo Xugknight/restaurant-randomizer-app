@@ -12,7 +12,6 @@ body {
   color: beige;
 }
 
-nav,
 footer {
   background-color: lightblue;
   display: flex;
@@ -23,18 +22,74 @@ footer {
   color: lightslategray;
 }
 
-nav a {
-  text-decoration: none;
-  color: slategray;
-  background-color: white;
-  padding: 1vmin;
-  border-radius: 1vmin;
+.site-nav{
+  background:#add8e6;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:.5rem 1rem;
+}
+.nav-left a,
+.nav-right a{
+  margin-right:.5rem;
+  text-decoration:none;
+  background:#fff;
+  color:#444;
+  padding:.3rem .7rem;
+  border-radius:.4rem;
+  font-size:1.9vh;
+}
+.nav-left a:hover,
+.nav-right a:hover{
+  background:#708090;
+  color:#fff;
+}
 
-  &:hover {
-    color: gray;
-    background-color: lightslategray;
-    color: white;
-  }
+.logo{font-size:2.2vh;}
+
+.user-menu {
+  position:relative;
+  display:inline-block;
+}
+
+.user-menu summary {
+  list-style:none;
+  cursor:pointer;
+  background:#fff;
+  padding:.3rem .7rem;
+  border-radius:.4rem;
+  user-select:none;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #222;
+}
+
+.user-menu[open] summary {
+  background:#708090;
+  color:#fff;
+}
+
+.user-menu .dropdown {
+  position:absolute;
+  right:0;
+  top:calc(100% + .25rem);
+  background:#fff;
+  padding:.5rem;
+  border:1px solid #ccc;
+  border-radius:.4rem;
+  display:flex;
+  flex-direction:column;
+  min-width:140px;
+  z-index:20;
+}
+.user-menu .dropdown a {
+  margin:.2rem 0;
+  background:none;
+  color:#444;
+}
+.user-menu .dropdown a:hover {
+  background:#708090;
+  color:#fff;
 }
 
 nav span {

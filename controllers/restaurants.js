@@ -146,8 +146,7 @@ router.delete('/:id', ensureLoggedIn, ensureAdmin, async (req, res) => {
 //TODO
 /*
 make reviews
-make favorites
-randomize favorites?
+filter by what user added
 make sure no dupes in DB
 */
 
