@@ -1,15 +1,15 @@
 /* Base */
 * {
   box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
 }
 body {
   margin: 0;
   min-height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  background-color: #121212; /* very dark gray */
-  color: #e0e0e0;            /* light gray */
+  background-color: #121212;
+  color: #e0e0e0;
 }
 main {
   display: flex;
@@ -19,7 +19,7 @@ main {
   padding: 0 1rem;
 }
 h1, h2 {
-  color: #ffffff; /* white */
+  color: #ffffff;
   text-align: center;
   margin: 1rem 0;
 }
@@ -38,14 +38,14 @@ h1, h2 {
   text-align: center;
 }
 .form-container {
-  background: #1e1e1e;      /* dark gray */
+  background: #1e1e1e;
   border-radius: 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 /* Nav */
 .site-nav {
-  background: #1f1f1f;      /* near-black */
+  background: #1f1f1f;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -65,12 +65,12 @@ h1, h2 {
   border: 1px solid transparent;
   border-radius: 0.35rem;
   text-decoration: none;
-  color: #e0e0e0;           /* light gray */
+  color: #e0e0e0;
 }
 .nav-left a:hover,
 .nav-right a:hover {
-  background: #333333;      /* medium gray */
-  color: #ffffff;           /* white */
+  background: #333333;
+  color: #ffffff;
 }
 .logo {
   font-size: 1.1rem;
@@ -85,12 +85,12 @@ h1, h2 {
 .user-menu summary {
   list-style: none;
   cursor: pointer;
-  background: #1e1e1e;      /* dark gray */
+  background: #1e1e1e;
   padding: 0.3rem 0.7rem;
   border-radius: 0.4rem;
   font-weight: bold;
   font-size: 1rem;
-  color: #ffffff;           /* white */
+  color: #ffffff; 
 }
 .user-menu[open] summary {
   background: #333333;
@@ -121,12 +121,12 @@ h1, h2 {
 
 /* Links */
 a {
-  color: #80d8ff;           /* light blue accent */
+  color: #80d8ff;
   text-decoration: none;
 }
 a:hover {
   text-decoration: underline;
-  color: #bb86fc;           /* light purple accent */
+  color: #bb86fc;
 }
 a:visited {
   color: #80d8ff;
@@ -141,7 +141,7 @@ a:visited {
 /* Buttons */
 button,
 .btn {
-  background-color: #2962ff; /* blue accent */
+  background-color: #2962ff;
   color: #ffffff !important;
   padding: 0.4rem 0.8rem;
   border: none;
@@ -154,22 +154,22 @@ button,
 }
 button:hover,
 .btn:hover {
-  background-color: #0039cb; /* darker blue */
+  background-color: #0039cb;
 }
 .btn.warning {
-  background-color: #ffb300; /* amber accent */
+  background-color: #ffb300;
   color: #000000 !important;
 }
 .btn.warning:hover {
-  background-color: #ffa000; /* darker amber */
+  background-color: #ffa000;
   color: #000000 !important;
 }
 .btn.danger {
-  background-color: #e53935; /* red accent */
+  background-color: #e53935;
   color: #ffffff !important;
 }
 .btn.danger:hover {
-  background-color: #b71c1c; /* darker red */
+  background-color: #b71c1c;
   color: #ffffff !important;
 }
 
@@ -187,7 +187,7 @@ label {
 input,
 select,
 textarea {
-  background: #2e2e2e;       /* dark gray */
+  background: #2e2e2e;
   color: #e0e0e0;
   padding: 0.5rem;
   font-size: 1rem;
@@ -199,7 +199,7 @@ textarea {
   resize: vertical;
 }
 .error-msg {
-  color: #ff6b6b;            /* pinkish red */
+  color: #ff6b6b;
 }
 
 /* Lists */
@@ -220,7 +220,7 @@ textarea {
 .restaurant-list .details,
 .favorites-list .details {
   margin: 0 0.5rem;
-  color: #cccccc;            /* medium light */
+  color: #cccccc;
   font-size: 0.95rem;
 }
 

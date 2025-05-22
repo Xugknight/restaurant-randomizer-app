@@ -43,4 +43,3 @@ app.use('/favorites', require('./controllers/favorites'));
 app.listen(port, () => {
   console.log(`The express app is ready on port ${port}!`);
 });
-

@@ -152,11 +152,4 @@ router.delete('/:id', ensureLoggedIn, ensureAdmin, async (req, res) => {
   res.redirect('/restaurants/admin');
 });
 
-//TODO
-/*
-make reviews
-filter by what user added
-make sure no dupes in DB
-*/
-
 module.exports = router;
