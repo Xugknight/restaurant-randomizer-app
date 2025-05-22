@@ -1,0 +1,12 @@
+<%- include('../partials/header.ejs') %>
+
+<h1>🎲 RANDOM FAVORITE 🎰</h1>
+
+<h2><a href="/restaurants/<%= restaurant._id %>"><%= restaurant.name %></a></h2>
+<p><strong>Category:</strong> <%= restaurant.category %></p>
+<p><strong>Cost:</strong> <%= restaurant.cost %></p>
+
+<a href="/favorites/random">🎲 ROLL AGAIN 🔁</a>
+<a href="/favorites">🔙 BACK TO FAVORITES</a>
+
+<%- include('../partials/footer.ejs') %>

@@ -13,6 +13,8 @@
       <a href="/restaurants">ALL RESTAURANTS</a>
       <a href="/restaurants/random">🎲 RANDOM 🎲</a>
       <% if (user) { %>
+        <a href="/favorites">❤️MY FAVORITES</a>
+        <a href="/favorites/random">🎰RANDOM FAVORITE🎰</a>
         <a href="/restaurants/new">ADD RESTAURANT</a>
         <% if (user.isAdmin) {%>
           <a href="/restaurants/admin">ADMIN</a>

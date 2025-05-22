@@ -17,7 +17,7 @@
 <% if (user && restaurant) { %>
   <% const isFavorited = favoriteIds.includes(restaurant._id.toString()); %>
   <form action="/favorites/<%= restaurant._id %>?_method=<%= isFavorited ? 'DELETE' : 'POST' %>" method="POST" style="display:inline;">
-    <button><%= isFavorited ? '❌' : '❤️' %></button>
+    <button><%= isFavorited ? '🚫' : '❤️' %></button>
   </form>
 <% } %>
 
@@ -28,8 +28,7 @@
     <button type="submit">REQUEST DELETE</button>
   </form>
   <% } %>
-
   <a href="/restaurants/random">🎲 FIND ANOTHER! 🎲</a>
-  <a href="/restaurants">BACK TO LIST!</a>
+  <a href="/restaurants">🔙 BACK TO LIST!</a>
 
 <%- include('../partials/footer.ejs') %>

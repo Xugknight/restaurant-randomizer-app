@@ -1,0 +1,17 @@
+<%- include('../partials/header.ejs') %>
+
+<h1>❤️ MY FAVORITES!</h1>
+
+<% if (favoriteRestaurants.length === 0) { %>
+  <p>You don't have any favorites!</p>
+<% } else { %>
+  <ul>
+    <% favoriteRestaurants.forEach((restaurant) => { %>
+      <li><a href="/restaurants/<%= restaurant._id %>"><%= restaurant.name %></a> — <%= restaurant.category %> — <%= restaurant.cost %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<a href="/restaurants">🔙 BACK</a>
+
+<%- include('../partials/footer.ejs') %>
