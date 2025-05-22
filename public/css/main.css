@@ -146,3 +146,36 @@ small {
   font-size: 12px;
   color: gray;
 }
+
+.home-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.home-title {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.link-group a {
+  display: block;
+  margin: 0.5rem 0;
+  font-size: 1.25rem;
+  text-decoration: none;
+  color: #333;
+}
+
+.user-greeting {
+  font-size: 1.5rem;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.admin-link {
+  font-weight: bold;
+  color: red;
+}

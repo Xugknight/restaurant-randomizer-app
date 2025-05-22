@@ -3,27 +3,33 @@
     <h1>🎲 RESTAURANT RANDOMIZER! 🎲</h1>
 
     <form method="GET" action="/restaurants/random" style="margin-bottom:1.5rem;">
+        
         <label><strong>Categories:</strong><br>
             <small>
-            Hold Ctrl (Windows) or ⌘ (Mac) to select multiple
+                Hold Ctrl (Windows) or ⌘ (Mac) to select multiple
             </small>
             <select name="category" multiple size="5">
-            <% categories.forEach((category) => { %>
-                <option value="<%= category %>" <%= selectedCategories.includes(category) ? 'selected' : '' %>><%= category %></option>
-            <% }) %>
-            </select>
-        </label>
-
-        <label style="margin-left:1rem;">
-            <strong>Cost:</strong><br>
-            <small>Leaving cost blank means "any cost".</small>
-            <select name="cost">
-            <option value="">Any</option>
-            <% costs.forEach((cost) => { %>
-                <option value="<%= cost %>" <%= selectedCosts.includes(cost) ? 'selected' : '' %>><%= cost %></option>
-            <% }) %>
-            </select>
-        </label>
+                <% categories.forEach((category) => { %>
+                    <option value="<%= category %>" <%= selectedCategories.includes(category) ? 'selected' : '' %>><%= category %></option>
+                    <% }) %>
+                </select>
+            </label>
+            
+            <label style="margin-left:1rem;">
+                <strong>Cost:</strong><br>
+                <small>Leaving cost blank means "any cost".</small>
+                <select name="cost">
+                    <option value="">Any</option>
+                    <% costs.forEach((cost) => { %>
+                        <option value="<%= cost %>" <%= selectedCosts.includes(cost) ? 'selected' : '' %>><%= cost %></option>
+                        <% }) %>
+                    </select>
+                </label>
+                
+                <label>
+                    <input type="checkbox" name="myRestaurants" value="true"<%= myRestaurantsSelected ? 'checked' : '' %>>
+                    Show restaurants I've added
+                </label>
         <br>
         <button type="submit" class="inline-button">ROLL THE 🎲!</button>
     </form>

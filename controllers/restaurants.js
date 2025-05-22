@@ -20,6 +20,9 @@ router.get('/', async (req, res) => {
   if (req.query.cost) {
     filter.cost = req.query.cost;
   }
+  if (req.query.myRestaurants === 'true' && req.user) {
+    filter.createdBy = req.user._id;
+  }
   const restaurants = await Restaurant
   .find(filter)
   .collation({ locale: 'en', strength: 2 })
@@ -28,7 +31,8 @@ router.get('/', async (req, res) => {
     restaurants, 
     categories,
     selectedCategory: req.query.category || '',
-    selectedCost: req.query.cost || ''
+    selectedCost: req.query.cost || '',
+    myRestaurantsSelected: req.query.myRestaurants === 'true'
   });
 });
 
@@ -63,6 +67,10 @@ router.get('/random', async (req, res) => {
   if (selectedCosts.length > 0) {
     filter.cost = { $in: selectedCosts };
   }
+  const onlyMyRestaurants = req.query.myRestaurants === 'true' && req.user;
+  if (onlyMyRestaurants) {
+    filter.createdBy = req.user._id;
+  }
   const count = await Restaurant.countDocuments(filter);
   if (count === 0) return res.redirect('/restaurants');
   const randomIndex = Math.floor(Math.random() * count);
@@ -72,7 +80,8 @@ router.get('/random', async (req, res) => {
     categories,
     costs: ['$', '$$', '$$$'],
     selectedCategories,
-    selectedCosts
+    selectedCosts,
+    myRestaurantsSelected: onlyMyRestaurants
   });
 });
 

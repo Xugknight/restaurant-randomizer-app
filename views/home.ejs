@@ -1,5 +1,28 @@
 <%- include('./partials/header.ejs') %>
 
-<h1>Home</h1>
+<div class="home-container">
+  <h1 class="home-title">🍽️ WELCOME TO THE RESTAURANT RANDOMIZER!</h1>
+
+  <div class="link-group">
+    <a href="/restaurants">👁️ VIEW ALL RESTAURANTS</a>
+    <a href="/restaurants/random">🎲 RANDOM RESTAURANT</a>
+  </div>
+
+  <% if (user) { %>
+    <div class="link-group">
+      <h2 class="user-greeting">👋 Hello, <span class="username"><%= user.username %></span>!</h2>
+
+      <a href="/restaurants/new">➕ ADD NEW RESTAURANT</a>
+      <a href="/favorites/random">🎰 RANDOM FROM FAVORITES ❤️</a>
+      <a href="/restaurants/random?myRestaurants=true">🎲 RANDOMIZE RESTAURANTS I'VE ADDED ➕</a>
+    </div>
+  <% } %>
+
+  <% if (user && user.isAdmin) { %>
+    <div>
+      <a href="/restaurants/admin" class="admin-link">⚙️ DELETE REQUESTS</a>
+    </div>
+  <% } %>
+</div>
 
 <%- include('./partials/footer.ejs') %>

@@ -7,8 +7,8 @@
 <% if (user) { %>
 <p><a href="/restaurants/new">➕ ADD RESTAURANT</a></p>
 <% } %>
-
     <form method="GET" action="/restaurants">
+        
         <label>
             Category:
             <select name="category">
@@ -16,18 +16,23 @@
                 <% categories.sort().forEach((category)=> { %>
                     <option value="<%= category %>" <%= selectedCategory === category ? 'selected' : '' %>><%= category %></option>
                     <% }) %>
-            </select>
-        </label>
-
-        <label>
-            Cost:
-            <select name="cost">
-                <option value="">All</option>
-                <option value="$" <%= selectedCost ==='$' ? 'selected' : '' %>>$</option>
-                <option value="$$" <%= selectedCost ==='$$' ? 'selected' : '' %>>$$</option>
-                <option value="$$$" <%= selectedCost ==='$$$' ? 'selected' : '' %>>$$$</option>
-            </select>
-        </label>
+                </select>
+            </label>
+            
+            <label>
+                Cost:
+                <select name="cost">
+                    <option value="">All</option>
+                    <option value="$" <%= selectedCost ==='$' ? 'selected' : '' %>>$</option>
+                    <option value="$$" <%= selectedCost ==='$$' ? 'selected' : '' %>>$$</option>
+                    <option value="$$$" <%= selectedCost ==='$$$' ? 'selected' : '' %>>$$$</option>
+                </select>
+            </label>
+            
+            <label>
+                <input type="checkbox" name="myRestaurants" value="true"<%= myRestaurantsSelected ? 'checked' : '' %>>
+                Show restaurants I've added
+            </label>
         <button type="submit">FILTER</button>
     </form>
 
