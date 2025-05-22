@@ -29,7 +29,7 @@ Visitors can roll the dice to get a random restaurant (with optional filters), a
 
 # Getting Started
 
-[Click to View Randomizer App!]()
+[Click to View Randomizer App!](https://restaurant-randomizer-7fdf1fb5fda0.herokuapp.com/)
 1. Run npm install
 2. Create .env file
 3. Link mongoDB URI and set SESSION_SECRET
