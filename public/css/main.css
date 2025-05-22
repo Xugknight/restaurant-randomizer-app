@@ -8,8 +8,18 @@ body {
   height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  background-color: #161615;
-  color: beige;
+  background-color: #f8f9fa;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1,h2 {
+  color:#333;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 footer {
@@ -29,20 +39,35 @@ footer {
   align-items:center;
   padding:.5rem 1rem;
 }
+
 .nav-left a,
-.nav-right a{
-  margin-right:.5rem;
-  text-decoration:none;
-  background:#fff;
-  color:#444;
-  padding:.3rem .7rem;
-  border-radius:.4rem;
-  font-size:1.9vh;
+.nav-right a {
+  padding: 0.2rem 0.6rem;
+  margin-right: 0.4rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.35rem;
+  transition: background 0.2s, color 0.2s;
 }
+
 .nav-left a:hover,
-.nav-right a:hover{
-  background:#708090;
-  color:#fff;
+.nav-right a:hover {
+  background: #708090;
+  color: #fff;
+}
+
+.nav-left a:focus,
+.nav-right a:focus {
+  outline: none;
+  border-color: #708090;
+}
+
+@media (max-width: 480px) {
+  .nav-left a,
+  .nav-right a {
+    font-size: 1.8vh;
+    padding: 0.25rem 0.55rem;
+  }
 }
 
 .logo{font-size:2.2vh;}
@@ -178,4 +203,17 @@ small {
 .admin-link {
   font-weight: bold;
   color: red;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #007bff;
 }
