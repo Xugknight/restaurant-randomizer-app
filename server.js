@@ -25,12 +25,11 @@ app.use(session({
   saveUninitialized: true
 }));
 
-// If a user is logged in, add the user's doc to req.user and res.locals.user
 app.use(require('./middleware/add-user-to-req-and-locals'));
 
 // Routes below
 
-// GET / (root/default) -> Home Page
+// GET / -> Home Page
 app.get('/', (req, res) => {
   res.render('home.ejs');
 });

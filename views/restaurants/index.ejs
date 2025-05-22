@@ -7,9 +7,7 @@
       <a href="/restaurants/new" class="btn">➕ ADD RESTAURANT</a>
     <% } %>
   </div>
-
   <h1>ALL RESTAURANTS</h1>
-
   <form method="GET" action="/restaurants" class="filter-form">
     <label>
       Category:
@@ -20,7 +18,6 @@
         <% }) %>
       </select>
     </label>
-
     <label>
       Cost:
       <select name="cost">
@@ -30,15 +27,12 @@
         <option value="$$$" <%= selectedCost ==='$$$' ? 'selected' : '' %>>$$$</option>
       </select>
     </label>
-
     <label class="checkbox-label">
       <input type="checkbox" name="myRestaurants" value="true" <%= myRestaurantsSelected ? 'checked' : '' %>>
       ONLY SHOW RESTAURANTS I'VE ADDED
     </label>
-
     <button type="submit">FILTER</button>
   </form>
-
   <% if (restaurants.length === 0) { %>
     <p>No restaurants match your criteria.</p>
   <% } else { %>

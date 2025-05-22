@@ -3,8 +3,6 @@ const router = express.Router();
 const Restaurant = require('../models/restaurant');
 const Review = require('../models/review');
 const categories = require('../utils/categories');
-
-// Middleware used to protect routes that need a logged in user
 const ensureLoggedIn = require('../middleware/ensure-logged-in');
 const ensureAdmin = require('../middleware/ensure-admin');
 

@@ -41,7 +41,6 @@ router.post('/sign-in', async (req, res) => {
     const isValidPassword = bcrypt.compareSync(req.body.password, user.password);
     if (!isValidPassword) throw new Error();
     req.session.userId = user._id;
-    // TODO: Redirect to what you want in your app
     res.redirect('/');
   } catch {
     res.render('auth/sign-in.ejs', { error: 'Invalid Credentials' });

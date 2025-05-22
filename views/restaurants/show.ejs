@@ -2,25 +2,20 @@
 
 <main class="show-container">
   <a href="/restaurants" class="back-link">🔙 BACK TO ALL RESTAURANTS</a>
-
   <h1><%= restaurant.name %></h1>
   <p class="category-cost"><%= restaurant.category %> • <%= restaurant.cost %></p>
-
   <% if (restaurant.description) { %>
     <p class="description"><strong>Description:</strong> <%= restaurant.description %></p>
   <% } %>
-
   <% if (restaurant.createdBy) { %>
     <p><strong>Added by:</strong> <%= restaurant.createdBy.username %></p>
   <% } %>
-
   <% if (user && restaurant) { %>
     <% const isFavorited = favoriteIds.includes(restaurant._id.toString()); %>
     <form action="/favorites/<%= restaurant._id %>?_method=<%= isFavorited ? 'DELETE' : 'POST' %>" method="POST" style="display:inline;">
       <button class="btn"><%= isFavorited ? '💔 Unfavorite' : '❤️ Favorite' %></button>
     </form>
   <% } %>
-
   <% if (user && restaurant.createdBy && (user._id.toString() === restaurant.createdBy._id.toString() || user.isAdmin)) { %>
     <div class="action-buttons">
       <a href="/restaurants/<%= restaurant._id %>/edit" class="btn">✏️ EDIT</a>
@@ -29,7 +24,6 @@
       </form>
     </div>
   <% } %>
-
   <div class="more-links">
     <a href="/restaurants/random" class="btn">🎲 FIND ANOTHER! 🎲</a>
   </div>

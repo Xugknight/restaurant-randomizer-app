@@ -5,7 +5,6 @@ const ensureLoggedIn = require('../middleware/ensure-logged-in');
 const restaurant = require('../models/restaurant');
 
 // Index
-// GET /favorites
 router.get('/', ensureLoggedIn, async (req, res) => {
     const favorites = await Favorite.find({ user: req.user._id }).populate('restaurant');
     const favoriteRestaurants = favorites.map((favorite) => favorite.restaurant);
@@ -13,7 +12,6 @@ router.get('/', ensureLoggedIn, async (req, res) => {
 });
 
 // Random Favorites
-// GET /favorites/random
 router.get('/random', ensureLoggedIn, async (req, res) => {
     const favorites = await Favorite.find({ user: req.user._id }).populate('restaurant');
     const favoriteRestaurants = favorites.map((favorite) => favorite.restaurant);
@@ -26,7 +24,6 @@ router.get('/random', ensureLoggedIn, async (req, res) => {
 });
 
 // Favorite
-// POST /favorites/:restaurantId
 router.post('/:restaurantId', ensureLoggedIn, async (req, res) => {
     try {
         await Favorite.create({
@@ -42,7 +39,6 @@ router.post('/:restaurantId', ensureLoggedIn, async (req, res) => {
 });
 
 // Unfavorite
-// DELETE /favorites/:restaurantId
 router.delete('/:restaurantId', ensureLoggedIn, async (req, res) => {
     await Favorite.findOneAndDelete({
         user: req.user._id,

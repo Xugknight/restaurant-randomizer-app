@@ -2,11 +2,9 @@
 
 <main class="form-container">
   <h1>EDIT “<%= restaurant.name %>”</h1>
-
   <form action="/restaurants/<%= restaurant._id %>?_method=PUT" method="POST" class="restaurant-form">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" value="<%= restaurant.name %>" required />
-
     <label for="category">Category:</label>
     <select id="category" name="category" required>
       <% categories.forEach((category) => { %>
@@ -15,17 +13,14 @@
         </option>
       <% }); %>
     </select>
-
     <label for="cost">Cost:</label>
     <select id="cost" name="cost" required>
       <option value="$" <%= restaurant.cost === '$' ? 'selected' : '' %>>$</option>
       <option value="$$" <%= restaurant.cost === '$$' ? 'selected' : '' %>>$$</option>
       <option value="$$$" <%= restaurant.cost === '$$$' ? 'selected' : '' %>>$$$</option>
     </select>
-
     <label for="description">Description:</label>
     <textarea id="description" name="description" rows="4" maxlength="300"><%= restaurant.description || '' %></textarea>
-
     <button type="submit">SAVE</button>
     <a href="/restaurants/<%= restaurant._id %>" class="back-link">CANCEL</a>
   </form>
