@@ -29,8 +29,11 @@ Visitors can roll the dice to get a random restaurant (with optional filters), a
 
 # Getting Started
 
+[Project Planning!](https://trello.com/b/zUOG6Tzr/project-2)
+
 [Click to View Randomizer App!](https://restaurant-randomizer-7fdf1fb5fda0.herokuapp.com/)
-1. Run npm install
+
+1. Run npm -i install
 2. Create .env file
 3. Link mongoDB URI and set SESSION_SECRET
 
